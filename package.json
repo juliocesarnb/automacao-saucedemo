@@ -1,0 +1,16 @@
+{
+  "name": "automacao-saucedemo",
+  "version": "1.0.0",
+  "description": "Projeto de automação SauceDemo",
+  "main": "index.js",
+  "scripts": {
+    "cypress:open": "cypress open",
+    "test": "cypress run"
+  },
+  "keywords": [],
+  "author": "Júlio César",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^15.13.1"
+  }
+}
