@@ -42,38 +42,3 @@ Clone este repositório e instale as dependências:
 git clone [https://github.com/juliocesarnb/automacao-saucedemo.git](https://github.com/juliocesarnb/automacao-saucedemo.git)
 cd automacao-saucedemo
 npm install
-3. Rodando os Testes
-Você pode rodar os testes de duas formas:
-
-Modo Headless (Terminal):
-Executa todos os testes em segundo plano e gera relatórios/vídeos automaticamente.
-
-Bash
-npm test
-Modo Interface Gráfica:
-Abre o painel interativo do Cypress para execução visual e debugging.
-
-Bash
-npx cypress open
-📁 Estrutura do Projeto
-Plaintext
-├── cypress/
-│   ├── e2e/              # Scripts de teste (.cy.js)
-│   ├── fixtures/         # Dados estáticos para testes (mocks)
-│   └── support/          # Comandos personalizados e configurações globais
-├── cypress.config.js     # Arquivo de configuração do Cypress
-├── package.json          # Gerenciamento de dependências e scripts npm
-└── README.md             # Documentação do projeto
-Desenvolvido por Júlio César Nunes Barbosa Software Developer & QA Enthusiast
-
-
-### Como garantir que funcione:
-1. No seu VS Code, abra o arquivo `README.md`.
-2. **Apague tudo** o que estiver lá.
-3. Cole o conteúdo acima.
-4. Salve o arquivo (`Ctrl + S`).
-5. No terminal, envie a atualização:
-   ```bash
-   git add README.md
-   git commit -m "docs: corrigindo formatação do README"
-   git push origin main
