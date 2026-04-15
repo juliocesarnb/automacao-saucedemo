@@ -42,3 +42,25 @@ Clone este repositório e instale as dependências:
 git clone [https://github.com/juliocesarnb/automacao-saucedemo.git](https://github.com/juliocesarnb/automacao-saucedemo.git)
 cd automacao-saucedemo
 npm install
+
+3. Rodando os Testes
+Você pode rodar os testes de duas formas:
+
+Modo Headless (Terminal):
+
+Bash
+npm test
+Modo Interface Gráfica:
+
+Bash
+npx cypress open
+📁 Estrutura do Projeto
+Plaintext
+├── cypress/
+│   ├── e2e/              # Scripts de teste (.cy.js)
+│   ├── fixtures/         # Dados estáticos para testes (mocks)
+│   └── support/          # Comandos personalizados e configurações globais
+├── cypress.config.js     # Arquivo de configuração do Cypress
+├── package.json          # Gerenciamento de dependências e scripts npm
+└── README.md             # Documentação do projeto
+Desenvolvido por Júlio César Nunes Barbosa | Software Developer & QA Enthusiast
