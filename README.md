@@ -84,5 +84,5 @@ npx cypress open
 
 ## 👨‍💻 Autor
 
-Desenvolvido por **Júlio César Nunes Barbosa**
-Software Developer & QA Enthusiast
+Desenvolvido por **Júlio Cesar Nunes Barbosa**
+Software Developer & QA 
