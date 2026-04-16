@@ -1,23 +1,45 @@
 # 🧪 Automação de Testes E2E - SauceDemo
 
-Este repositório contém o projeto de automação de testes para o site [SauceDemo](https://www.saucedemo.com/), utilizando o framework **Cypress**. O foco principal foi criar uma suíte de testes que não apenas valida o "caminho feliz", mas também identifica bugs intencionais inseridos no ambiente para diferentes perfis de usuários.
+Este projeto consiste em uma suíte de testes automatizados End-to-End (E2E) para a aplicação web [SauceDemo](https://www.saucedemo.com/), utilizando o framework **Cypress**.
+
+O objetivo principal é validar fluxos críticos da aplicação, identificar falhas intencionais (bugs) e demonstrar boas práticas de automação com foco em **qualidade, escalabilidade e manutenção**.
 
 ---
 
-## 🎯 Estratégia de Teste
+## 🎯 Objetivo do Projeto
 
-A estratégia foi baseada no mapeamento de comportamentos específicos para cada tipo de usuário disponível na plataforma. Os detalhes dos casos de teste foram baseados no plano de testes estruturado no Notion.
+* Validar o funcionamento de fluxos essenciais da aplicação
+* Detectar bugs intencionais com diferentes perfis de usuários
+* Demonstrar aplicação de boas práticas de automação
+* Simular um ambiente real de testes em nível profissional
 
-### Cenários Automatizados:
+---
 
-| ID         | Cenário            | Perfil de Usuário         | Status Esperado | Nota                              |
-| ---------- | ------------------ | ------------------------- | --------------- | --------------------------------- |
-| **TC-001** | Login com Sucesso  | `standard_user`           | ✅ Pass          | Valida o fluxo base.              |
-| **TC-002** | Login Bloqueado    | `locked_out_user`         | ✅ Pass          | Valida mensagem de erro.          |
-| **TC-003** | Performance Glitch | `performance_glitch_user` | ❌ Fail          | Detecta delay > 2s no login.      |
-| **TC-004** | Erro de Lógica     | `error_user`              | ❌ Fail          | Detecta falha ao adicionar itens. |
-| **TC-005** | Erro Visual        | `visual_user`             | ❌ Fail          | Detecta desalinhamento de layout. |
-| **TC-006** | Fluxo de Compra    | `standard_user`           | ✅ Pass          | E2E completo (Add -> Checkout).   |
+## 🧠 Estratégia de Teste
+
+A estratégia foi baseada na validação de comportamentos específicos para diferentes tipos de usuários disponíveis na plataforma.
+
+### 👥 Perfis de Usuário Testados:
+
+* `standard_user` → fluxo normal
+* `locked_out_user` → usuário bloqueado
+* `performance_glitch_user` → problema de performance
+* `error_user` → erros de lógica
+* `visual_user` → problemas visuais
+
+---
+
+## ✅ Cenários Automatizados
+
+| ID              | Cenário                     | Tipo       | Status Esperado |
+| --------------- | --------------------------- | ---------- | --------------- |
+| TC-LOGIN-001    | Login com sucesso           | Smoke      | ✅ Pass          |
+| TC-LOGIN-002    | Login com usuário bloqueado | Smoke      | ✅ Pass          |
+| TC-CART-003     | Adicionar item ao carrinho  | E2E        | ✅ Pass          |
+| TC-CHECKOUT-004 | Fluxo completo de compra    | E2E        | ✅ Pass          |
+| TC-PERF-005     | Validação de performance    | Regression | ❌ Fail          |
+| TC-ERROR-006    | Falha ao adicionar item     | Regression | ❌ Fail          |
+| TC-UI-007       | Problema visual             | Regression | ❌ Fail          |
 
 ---
 
@@ -25,64 +47,153 @@ A estratégia foi baseada no mapeamento de comportamentos específicos para cada
 
 * **Framework:** Cypress
 * **Linguagem:** JavaScript (ES6+)
-* **Ambiente:** Windows 11 / Node.js
+* **Gerenciador de Pacotes:** Node.js / npm
 * **Versionamento:** Git & GitHub
+* **Sistema Operacional:** Windows 11
+
+---
+
+## 🏗️ Arquitetura do Projeto
+
+O projeto foi estruturado utilizando o padrão **Page Object Model (POM)**, amplamente utilizado em automação de testes para melhorar organização, reutilização e manutenção.
+
+```plaintext id="2lq6r1"
+cypress/
+ ┣ e2e/
+ ┃ ┣ inventory/
+ ┃ ┃ ┣ add_to_cart.spec.cy.js
+ ┃ ┃ ┗ checkout_flow.spec.cy.js
+ ┃ ┣ ui/
+ ┃ ┃ ┗ ui_validation.spec.cy.js
+ ┃ ┗ users/
+ ┃ ┃ ┗ edge_users.spec.cy.js
+ ┣ smoke/
+ ┃ ┗ auth/
+ ┃ ┃ ┗ login.spec.cy.js
+ ┣ pages/
+ ┃ ┣ LoginPage.js
+ ┃ ┣ InventoryPage.js
+ ┃ ┗ CheckoutPage.js
+ ┣ fixtures/
+ ┃ ┗ users.json
+ ┣ support/
+ ┃ ┣ commands.js
+ ┃ ┗ e2e.js
+```
+
+---
+
+## 🧱 Padrão Page Object Model (POM)
+
+O projeto utiliza o padrão **Page Object Model**, onde cada página da aplicação é representada por uma classe responsável pelas interações com a interface.
+
+### ✔ Benefícios:
+
+* Redução de duplicação de código
+* Facilidade de manutenção
+* Maior legibilidade dos testes
+* Separação entre ações e validações
 
 ---
 
 ## 🚀 Como Executar o Projeto
 
-### 1. Pré-requisitos
+### 🔹 1. Pré-requisitos
 
-Certifique-se de ter o **Node.js** instalado em sua máquina.
+* Node.js instalado
+* Git instalado
 
-### 2. Instalação
+---
 
-Clone este repositório e instale as dependências:
+### 🔹 2. Clonar o repositório
 
-```bash
+```bash id="3b8fj9"
 git clone https://github.com/juliocesarnb/automacao-saucedemo.git
 cd automacao-saucedemo
+```
+
+---
+
+### 🔹 3. Instalar dependências
+
+```bash id="zqk3p8"
 npm install
 ```
 
-### 3. Rodando os Testes
+---
 
-Você pode rodar os testes de duas formas:
+### 🔹 4. Executar os testes
 
-#### 🔹 Modo Headless (Terminal)
+#### ▶️ Modo Headless (terminal)
 
-Executa todos os testes em segundo plano e gera relatórios/vídeos automaticamente.
-
-```bash
+```bash id="z6r1xg"
 npm test
 ```
 
-#### 🔹 Modo Interface Gráfica
+---
 
-Abre o painel interativo do Cypress para execução visual e debugging.
+#### 🖥️ Modo Interativo (Cypress UI)
 
-```bash
+```bash id="5qj9m1"
 npx cypress open
 ```
 
 ---
 
-## 📁 Estrutura do Projeto
+## 📸 Evidências de Execução
 
-```plaintext
-├── cypress/
-│   ├── e2e/              # Scripts de teste (.cy.js)
-│   ├── fixtures/         # Dados estáticos para testes (mocks)
-│   └── support/          # Comandos personalizados e configurações globais
-├── cypress.config.js     # Arquivo de configuração do Cypress
-├── package.json          # Gerenciamento de dependências e scripts npm
-└── README.md             # Documentação do projeto
-```
+### ❌ Testes que detectam falhas reais:
+
+* Performance glitch user
+* Error user
+* Visual user
+
+### 🎥 Execução automatizada:
+
+Os testes geram automaticamente:
+
+* 📷 Screenshots em falhas
+* 🎥 Vídeos das execuções
+
+---
+
+## 💡 Boas Práticas Aplicadas
+
+* ✔ Page Object Model (POM)
+* ✔ Separação de responsabilidades
+* ✔ Uso de fixtures para dados de teste
+* ✔ Testes organizados por domínio (inventory, users, ui)
+* ✔ Separação de testes Smoke, E2E e Regression
+* ✔ Assertions robustas (validação de UI, URL e dados)
+* ✔ Código reutilizável e escalável
+
+---
+
+## 📈 Possíveis Melhorias Futuras
+
+* Integração com CI/CD (GitHub Actions)
+* Testes de API (Supertest / Postman)
+* Uso de `cy.intercept()` para mock de requisições
+* Geração de relatórios automatizados
+* Execução paralela de testes
 
 ---
 
 ## 👨‍💻 Autor
 
-Desenvolvido por **Júlio Cesar Nunes Barbosa**
-Software Developer & QA 
+**Júlio César Nunes Barbosa**
+Software Developer & QA Engineer
+
+---
+
+## 📌 Considerações Finais
+
+Este projeto foi desenvolvido com foco em simular um ambiente real de automação de testes, aplicando conceitos e práticas utilizadas no mercado de QA.
+
+Mais do que validar fluxos, o projeto demonstra capacidade de:
+
+* Identificar falhas
+* Estruturar testes escaláveis
+* Escrever código limpo e manutenível
+
+---
