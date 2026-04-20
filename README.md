@@ -95,17 +95,21 @@ O projeto está integrado com GitHub Actions.
 git clone https://github.com/juliocesarnb/automacao-saucedemo.git
 cd automacao-saucedemo
 npm install
-
-3. Execução dos Testes
+```
+## 3. Execução dos Testes
 Modo Headless (CI)
+```bash 
 npm test
+```
 
-Modo Interativo (GUI)
+### Modo Interativo (GUI)
+```bash 
 npx cypress open
-
-Executar apenas E2E
+```
+## Executar apenas E2E
+```bash 
 npm run test:e2e
-
+```
 ## 📊 Boas Práticas Aplicadas
 Separação entre testes e implementação (POM)
 Testes independentes e determinísticos
@@ -124,6 +128,7 @@ QA Automation Engineer
 
 GitHub: https://github.com/juliocesarnb
 LinkedIn: (https://www.linkedin.com/in/julio-cesar-nb/)
+
 ## 🎯 Objetivo do Projeto
 Demonstrar habilidades em automação de testes E2E
 Aplicar boas práticas utilizadas no mercado
