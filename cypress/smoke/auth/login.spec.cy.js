@@ -1,9 +1,5 @@
 import LoginPage from '../../pages/LoginPage';
 import InventoryPage from '../../pages/InventoryPage';
-import {
-  registerPageRouteAliases,
-  waitForRoute,
-} from '../../support/network';
 
 describe('Login smoke flow', () => {
   let users;
@@ -13,19 +9,20 @@ describe('Login smoke flow', () => {
       users = data;
     });
 
-    registerPageRouteAliases();
     LoginPage.visit();
-    waitForRoute('@getLoginPage');
+    LoginPage.usernameInput().should('be.visible');
+    LoginPage.passwordInput().should('be.visible');
+    LoginPage.loginButton().should('be.visible').and('contain.text', 'Login');
   });
 
   it('TC-LOGIN-001 should authenticate a standard user and open the inventory page', () => {
-    LoginPage.login(users.standard.username, users.standard.password);
+    // Arrange
+    const standardUser = users.standard;
 
-    waitForRoute('@getInventoryPage').then((interception) => {
-      expect(interception.request.method).to.eq('GET');
-      expect(interception.response.body).to.include('Swag Labs');
-    });
+    // Act
+    LoginPage.login(standardUser.username, standardUser.password);
 
+    // Assert
     cy.url().should('include', '/inventory.html');
     InventoryPage.pageTitle().should('be.visible').and('have.text', 'Products');
     InventoryPage.inventoryList().should('be.visible');
@@ -34,15 +31,20 @@ describe('Login smoke flow', () => {
   });
 
   it('TC-LOGIN-002 should display the exact locked user error message', () => {
-    LoginPage.login(users.locked.username, users.locked.password);
+    // Arrange
+    const lockedUser = users.locked;
 
+    // Act
+    LoginPage.login(lockedUser.username, lockedUser.password);
+
+    // Assert
     cy.url().should('eq', `${Cypress.config('baseUrl')}/`);
-    cy.get('@getInventoryPage.all').should('have.length', 0);
     LoginPage.errorMessage()
       .should('be.visible')
       .and(
         'have.text',
         'Epic sadface: Sorry, this user has been locked out.'
       );
+    InventoryPage.inventoryList().should('not.exist');
   });
 });

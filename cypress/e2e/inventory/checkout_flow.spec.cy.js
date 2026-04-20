@@ -1,10 +1,6 @@
 import LoginPage from '../../pages/LoginPage';
 import InventoryPage from '../../pages/InventoryPage';
 import CheckoutPage from '../../pages/CheckoutPage';
-import {
-  registerPageRouteAliases,
-  waitForRoute,
-} from '../../support/network';
 
 describe('Checkout flow', () => {
   let users;
@@ -20,16 +16,19 @@ describe('Checkout flow', () => {
       users = data;
     });
 
-    registerPageRouteAliases();
     LoginPage.visit();
-    waitForRoute('@getLoginPage');
+    LoginPage.usernameInput().should('be.visible');
   });
 
   it('TC-CHECKOUT-001 should complete a purchase from inventory to confirmation', () => {
-    LoginPage.login(users.standard.username, users.standard.password);
+    // Arrange
+    const standardUser = users.standard;
 
-    waitForRoute('@getInventoryPage');
+    // Act
+    LoginPage.login(standardUser.username, standardUser.password);
+
     cy.url().should('include', '/inventory.html');
+    InventoryPage.inventoryItems().should('have.length.greaterThan', 0);
     InventoryPage.addItemsToCart([
       'sauce-labs-backpack',
       'sauce-labs-bike-light',
@@ -37,25 +36,19 @@ describe('Checkout flow', () => {
     InventoryPage.cartBadge().should('be.visible').and('have.text', '2');
 
     InventoryPage.goToCart();
-
-    waitForRoute('@getCartPage');
     cy.url().should('include', '/cart.html');
     CheckoutPage.cartItems().should('have.length', 2);
 
     CheckoutPage.startCheckout();
-
-    waitForRoute('@getCheckoutStepOnePage');
     cy.url().should('include', '/checkout-step-one.html');
     CheckoutPage.fillCheckoutForm(checkoutData);
     CheckoutPage.continueCheckout();
 
-    waitForRoute('@getCheckoutStepTwoPage');
     cy.url().should('include', '/checkout-step-two.html');
+    CheckoutPage.finishButton().should('be.visible');
     CheckoutPage.finishCheckout();
 
-    waitForRoute('@getCheckoutCompletePage').then((interception) => {
-      expect(interception.response.body).to.include('Checkout: Complete!');
-    });
+    // Assert
     cy.url().should('include', '/checkout-complete.html');
     CheckoutPage.completeHeader()
       .should('be.visible')

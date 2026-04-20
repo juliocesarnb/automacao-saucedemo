@@ -15,5 +15,6 @@ module.exports = defineConfig({
       'cypress/e2e/**/*.cy.{js,jsx}',
       'cypress/smoke/**/*.cy.{js,jsx}',
     ],
+    testIsolation: true,
   },
 });
