@@ -33,3 +33,98 @@ A estratégia foi baseada em diferentes perfis de usuários e cenários de negó
 ---
 
 ## 🧱 Arquitetura do Projeto
+cypress
+┣ e2e
+┃ ┣ inventory
+┃ ┣ ui
+┃ ┗ users
+┣ fixtures
+┣ pages # Page Object Model (POM)
+┣ smoke
+┣ support
+┗ videos / screenshots
+
+---
+
+## 🔥 Diferenciais Técnicos
+
+- Implementação de Page Object Model (POM)
+- Uso de seletores estáveis (`data-test`)
+- Testes organizados por escopo (Smoke e E2E)
+- Estratégias anti-flaky:
+  - Remoção de `cy.wait()` fixo
+  - Sincronização baseada no estado da aplicação
+- Uso de fixtures para controle de dados
+- Estrutura modular e reutilizável
+- Validação de erros reais da aplicação (ex: error_user)
+
+---
+
+## 🔄 CI/CD
+
+O projeto está integrado com GitHub Actions.
+
+### Pipeline:
+- Executa automaticamente a cada `push` ou `pull request`
+- Executa testes em modo headless
+- Gera vídeos e screenshots em caso de falha
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+- Cypress
+- JavaScript (ES6+)
+- Node.js
+- GitHub Actions
+- Page Object Model (POM)
+
+---
+
+## 🚀 Como Executar o Projeto
+
+### 1. Pré-requisitos
+
+- Node.js instalado
+
+---
+
+### 2. Instalação
+
+```bash
+git clone https://github.com/juliocesarnb/automacao-saucedemo.git
+cd automacao-saucedemo
+npm install
+
+3. Execução dos Testes
+Modo Headless (CI)
+npm test
+
+Modo Interativo (GUI)
+npx cypress open
+
+Executar apenas E2E
+npm run test:e2e
+
+## 📊 Boas Práticas Aplicadas
+Separação entre testes e implementação (POM)
+Testes independentes e determinísticos
+Evitar dependência de tempo (wait fixo)
+Uso de dados controlados (fixtures)
+Organização por contexto (smoke, e2e)
+Código limpo e reutilizável
+
+## ⚠️ Observações
+Alguns testes falham propositalmente para demonstrar detecção de bugs reais (ex: error_user)
+O projeto valida o comportamento real da aplicação (sem uso de mocks)
+
+##👨‍💻 Autor
+Júlio Cesar Nunes Barbosa
+QA Automation Engineer
+
+GitHub: https://github.com/juliocesarnb
+LinkedIn: (https://www.linkedin.com/in/julio-cesar-nb/)
+## 🎯 Objetivo do Projeto
+Demonstrar habilidades em automação de testes E2E
+Aplicar boas práticas utilizadas no mercado
+Servir como projeto de portfólio para oportunidades em QA Automation
