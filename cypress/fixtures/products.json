@@ -1,0 +1,31 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "name": "Sauce Labs Backpack",
+      "slug": "sauce-labs-backpack",
+      "description": "Carry your daily gear with a durable backpack built for work, commuting, and travel.",
+      "price": 29.99,
+      "currency": "USD",
+      "inventory": 42
+    },
+    {
+      "id": 2,
+      "name": "Sauce Labs Bike Light",
+      "slug": "sauce-labs-bike-light",
+      "description": "A compact bike light with bright output and a weather-resistant body.",
+      "price": 9.99,
+      "currency": "USD",
+      "inventory": 18
+    },
+    {
+      "id": 3,
+      "name": "Sauce Labs Bolt T-Shirt",
+      "slug": "sauce-labs-bolt-t-shirt",
+      "description": "Soft cotton t-shirt with a fitted cut and the Sauce Labs bolt logo.",
+      "price": 15.99,
+      "currency": "USD",
+      "inventory": 25
+    }
+  ]
+}

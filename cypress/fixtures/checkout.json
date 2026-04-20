@@ -1,0 +1,28 @@
+{
+  "orderId": "ORDER-2026-000123",
+  "status": "confirmed",
+  "paymentStatus": "paid",
+  "currency": "USD",
+  "subtotal": 39.98,
+  "tax": 3.20,
+  "total": 43.18,
+  "items": [
+    {
+      "id": 1,
+      "name": "Sauce Labs Backpack",
+      "quantity": 1,
+      "unitPrice": 29.99
+    },
+    {
+      "id": 2,
+      "name": "Sauce Labs Bike Light",
+      "quantity": 1,
+      "unitPrice": 9.99
+    }
+  ],
+  "shipping": {
+    "firstName": "Julio",
+    "lastName": "Cesar",
+    "postalCode": "60000-000"
+  }
+}

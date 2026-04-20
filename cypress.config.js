@@ -14,6 +14,6 @@ module.exports = defineConfig({
     specPattern: [
       'cypress/e2e/**/*.cy.{js,jsx}',
       'cypress/smoke/**/*.cy.{js,jsx}',
-    ]
+    ],
   },
 });
