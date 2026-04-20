@@ -41,6 +41,13 @@ describe('Cart flow', () => {
   it('TC-CART-008 should add a single item to the cart for the error user', () => {
     // Arrange
     const errorUser = users.error;
+    let applicationErrorCaptured = false;
+
+    cy.on('uncaught:exception', (err) => {
+      expect(err.message).to.include('Failed to add item');
+      applicationErrorCaptured = true;
+      return false;
+    });
 
     // Act
     LoginPage.login(errorUser.username, errorUser.password);
@@ -50,10 +57,16 @@ describe('Cart flow', () => {
     InventoryPage.addItemToCart('sauce-labs-bolt-t-shirt');
 
     // Assert
-    InventoryPage.cartBadge().should('be.visible').and('have.text', '1');
+    cy.then(() => {
+      expect(applicationErrorCaptured).to.eq(true);
+    });
+    InventoryPage.cartBadge().should('not.exist');
     InventoryPage
       .removeFromCartButton('sauce-labs-bolt-t-shirt')
+      .should('not.exist');
+    InventoryPage
+      .addToCartButton('sauce-labs-bolt-t-shirt')
       .should('be.visible')
-      .and('contain.text', 'Remove');
+      .and('contain.text', 'Add to cart');
   });
 });

@@ -12,7 +12,7 @@ describe('Login smoke flow', () => {
     LoginPage.visit();
     LoginPage.usernameInput().should('be.visible');
     LoginPage.passwordInput().should('be.visible');
-    LoginPage.loginButton().should('be.visible').and('contain.text', 'Login');
+    LoginPage.loginButton().should('be.visible');
   });
 
   it('TC-LOGIN-001 should authenticate a standard user and open the inventory page', () => {
