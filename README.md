@@ -1,199 +1,104 @@
-# 🧪 Automação de Testes E2E - SauceDemo
+🧪 Automação de Testes E2E - SauceDemo
 
-Este projeto consiste em uma suíte de testes automatizados End-to-End (E2E) para a aplicação web [SauceDemo](https://www.saucedemo.com/), utilizando o framework **Cypress**.
+Este repositório contém um projeto completo de automação de testes End-to-End (E2E) para o site SauceDemo, utilizando o framework Cypress.
 
-O objetivo principal é validar fluxos críticos da aplicação, identificar falhas intencionais (bugs) e demonstrar boas práticas de automação com foco em **qualidade, escalabilidade e manutenção**.
+O objetivo do projeto é validar fluxos críticos de um e-commerce, identificar comportamentos inconsistentes e aplicar boas práticas de automação utilizadas no mercado, como Page Object Model (POM), testes resilientes e integração com CI/CD.
 
----
+🎯 Estratégia de Teste
 
-## 🎯 Objetivo do Projeto
+A estratégia foi baseada em diferentes perfis de usuários e cenários de negócio, cobrindo:
 
-* Validar o funcionamento de fluxos essenciais da aplicação
-* Detectar bugs intencionais com diferentes perfis de usuários
-* Demonstrar aplicação de boas práticas de automação
-* Simular um ambiente real de testes em nível profissional
+Fluxos críticos (login, carrinho, checkout)
+Cenários positivos e negativos
+Usuários com comportamentos problemáticos (bugados)
+Validação de UI e comportamento da aplicação
+✅ Cenários Automatizados
+ID	Cenário	Tipo	Status
+TC-LOGIN-001	Login com sucesso	Smoke	Pass
+TC-LOGIN-002	Login com usuário bloqueado	Smoke	Pass
+TC-CART-007	Checkout com carrinho vazio	E2E	Pass
+TC-CART-008	Adição de item com erro (error_user)	E2E	Fail (bug esperado)
+TC-CHECKOUT-001	Fluxo completo de compra	E2E	Pass
+TC-UI-011	Validação de UI (visual_user)	E2E	Pass
+TC-PERF-010	Performance (performance_glitch_user)	E2E	Pass
+TC-EDGE-011	Validação de comportamento inconsistente	E2E	Pass
+🧱 Arquitetura do Projeto
 
----
+O projeto foi estruturado seguindo boas práticas para escalabilidade e manutenção:
 
-## 🧠 Estratégia de Teste
+cypress
+ ┣ e2e
+ ┃ ┣ inventory
+ ┃ ┣ ui
+ ┃ ┗ users
+ ┣ fixtures
+ ┣ pages          # Page Object Model (POM)
+ ┣ smoke
+ ┣ support
+ ┗ videos / screenshots
+🔥 Diferenciais Técnicos
+Implementação de Page Object Model (POM) para separação entre testes e lógica de UI
+Uso de seletores estáveis (data-test)
+Testes organizados por escopo (Smoke e E2E)
+Aplicação de estratégias anti-flaky:
+Remoção de cy.wait() fixo
+Sincronização baseada no estado da aplicação
+Uso de fixtures para controle de dados
+Estrutura modular e reutilizável
+Tratamento de erros reais da aplicação (ex: error_user)
+🔄 CI/CD
 
-A estratégia foi baseada na validação de comportamentos específicos para diferentes tipos de usuários disponíveis na plataforma.
+O projeto está integrado com GitHub Actions.
 
-### 👥 Perfis de Usuário Testados:
-
-* `standard_user` → fluxo normal
-* `locked_out_user` → usuário bloqueado
-* `performance_glitch_user` → problema de performance
-* `error_user` → erros de lógica
-* `visual_user` → problemas visuais
-
----
-
-## ✅ Cenários Automatizados
-
-| ID              | Cenário                     | Tipo       | Status Esperado |
-| --------------- | --------------------------- | ---------- | --------------- |
-| TC-LOGIN-001    | Login com sucesso           | Smoke      | ✅ Pass          |
-| TC-LOGIN-002    | Login com usuário bloqueado | Smoke      | ✅ Pass          |
-| TC-CART-003     | Adicionar item ao carrinho  | E2E        | ✅ Pass          |
-| TC-CHECKOUT-004 | Fluxo completo de compra    | E2E        | ✅ Pass          |
-| TC-PERF-005     | Validação de performance    | Regression | ❌ Fail          |
-| TC-ERROR-006    | Falha ao adicionar item     | Regression | ❌ Fail          |
-| TC-UI-007       | Problema visual             | Regression | ❌ Fail          |
-
----
-
-## 🛠️ Tecnologias Utilizadas
-
-* **Framework:** Cypress
-* **Linguagem:** JavaScript (ES6+)
-* **Gerenciador de Pacotes:** Node.js / npm
-* **Versionamento:** Git & GitHub
-* **Sistema Operacional:** Windows 11
-
----
-
-## 🏗️ Arquitetura do Projeto
-
-O projeto foi estruturado utilizando o padrão **Page Object Model (POM)**, amplamente utilizado em automação de testes para melhorar organização, reutilização e manutenção.
-
-```plaintext id="2lq6r1"
-cypress/
- ┣ e2e/
- ┃ ┣ inventory/
- ┃ ┃ ┣ add_to_cart.spec.cy.js
- ┃ ┃ ┗ checkout_flow.spec.cy.js
- ┃ ┣ ui/
- ┃ ┃ ┗ ui_validation.spec.cy.js
- ┃ ┗ users/
- ┃ ┃ ┗ edge_users.spec.cy.js
- ┣ smoke/
- ┃ ┗ auth/
- ┃ ┃ ┗ login.spec.cy.js
- ┣ pages/
- ┃ ┣ LoginPage.js
- ┃ ┣ InventoryPage.js
- ┃ ┗ CheckoutPage.js
- ┣ fixtures/
- ┃ ┗ users.json
- ┣ support/
- ┃ ┣ commands.js
- ┃ ┗ e2e.js
-```
-
----
-
-## 🧱 Padrão Page Object Model (POM)
-
-O projeto utiliza o padrão **Page Object Model**, onde cada página da aplicação é representada por uma classe responsável pelas interações com a interface.
-
-### ✔ Benefícios:
-
-* Redução de duplicação de código
-* Facilidade de manutenção
-* Maior legibilidade dos testes
-* Separação entre ações e validações
-
----
-
-## 🚀 Como Executar o Projeto
-
-### 🔹 1. Pré-requisitos
-
-* Node.js instalado
-* Git instalado
-
----
-
-### 🔹 2. Clonar o repositório
-
-```bash id="3b8fj9"
+Pipeline:
+Executa automaticamente a cada push ou pull request
+Roda todos os testes em modo headless
+Gera:
+vídeos
+screenshots em caso de falha
+🛠️ Tecnologias Utilizadas
+Cypress
+JavaScript (ES6+)
+Node.js
+GitHub Actions
+Page Object Model (POM)
+🚀 Como Executar o Projeto
+1. Pré-requisitos
+Node.js instalado
+2. Instalação
 git clone https://github.com/juliocesarnb/automacao-saucedemo.git
 cd automacao-saucedemo
-```
-
----
-
-### 🔹 3. Instalar dependências
-
-```bash id="zqk3p8"
 npm install
-```
-
----
-
-### 🔹 4. Executar os testes
-
-#### ▶️ Modo Headless (terminal)
-
-```bash id="z6r1xg"
+3. Execução dos Testes
+Modo Headless (CI)
 npm test
-```
-
----
-
-#### 🖥️ Modo Interativo (Cypress UI)
-
-```bash id="5qj9m1"
+Modo Interativo (GUI)
 npx cypress open
-```
+Executar apenas Smoke Tests
+npm run test:smoke
+Executar apenas E2E
+npm run test:e2e
+📊 Boas Práticas Aplicadas
+Separação entre teste e implementação (POM)
+Testes independentes e determinísticos
+Evitar dependência de tempo (wait fixo)
+Uso de dados controlados (fixtures)
+Organização por contexto (smoke, e2e)
+Código limpo e reutilizável
+⚠️ Observações Importantes
+Alguns testes falham propositalmente para demonstrar a detecção de bugs reais da aplicação (ex: error_user)
+O projeto não depende de mocks, pois valida o comportamento real da aplicação
+👨‍💻 Autor
 
----
+Júlio Cesar Nunes Barbosa
+QA Automation Engineer
 
-## 📸 Evidências de Execução
+GitHub: https://github.com/juliocesarnb
+LinkedIn: (adicione aqui)
+📌 Objetivo do Projeto
 
-### ❌ Testes que detectam falhas reais:
+Este projeto foi desenvolvido com foco em:
 
-* Performance glitch user
-* Error user
-* Visual user
-
-### 🎥 Execução automatizada:
-
-Os testes geram automaticamente:
-
-* 📷 Screenshots em falhas
-* 🎥 Vídeos das execuções
-
----
-
-## 💡 Boas Práticas Aplicadas
-
-* ✔ Page Object Model (POM)
-* ✔ Separação de responsabilidades
-* ✔ Uso de fixtures para dados de teste
-* ✔ Testes organizados por domínio (inventory, users, ui)
-* ✔ Separação de testes Smoke, E2E e Regression
-* ✔ Assertions robustas (validação de UI, URL e dados)
-* ✔ Código reutilizável e escalável
-
----
-
-## 📈 Possíveis Melhorias Futuras
-
-* Integração com CI/CD (GitHub Actions)
-* Testes de API (Supertest / Postman)
-* Uso de `cy.intercept()` para mock de requisições
-* Geração de relatórios automatizados
-* Execução paralela de testes
-
----
-
-## 👨‍💻 Autor
-
-**Júlio César Nunes Barbosa**
-Software Developer & QA Engineer
-
----
-
-## 📌 Considerações Finais
-
-Este projeto foi desenvolvido com foco em simular um ambiente real de automação de testes, aplicando conceitos e práticas utilizadas no mercado de QA.
-
-Mais do que validar fluxos, o projeto demonstra capacidade de:
-
-* Identificar falhas
-* Estruturar testes escaláveis
-* Escrever código limpo e manutenível
-
----
+Demonstrar habilidades em automação de testes E2E
+Aplicar práticas utilizadas no mercado
+Servir como projeto de portfólio para oportunidades em QA Automation
